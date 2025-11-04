@@ -3,6 +3,7 @@ const scriptURL = "https://script.google.com/macros/s/AKfycbxLG3SwLVDgJX3Tf8c-S2
 
 // Lista de presentes (nomes simplificados e sem acentos)
 const presentes = [
+  { nome: "Jogo de Panelas Brinox Antiaderente Ceramic Life 7 Peças", imagem: "images/panelas.jpg" },
   { nome: "Air Fryer", imagem: "images/Airfryer.jpg" },
   { nome: "Amassador de Batata", imagem: "images/amassadordebatata.jpg" },
   { nome: "Aspirador de Pó Vertical", imagem: "images/aspiradordepo.jpg" },
