@@ -1,5 +1,5 @@
 // URL do Apps Script do Google Sheets:
-const scriptURL = "https://script.google.com/macros/s/AKfycbwzMRJc0z8tVctg9RA-gq0kXlkDuRLZ0F2oRFvTbCeT8PweZFOQbnlOki7VlY37uCNc/exec";
+const scriptURL = "https://script.google.com/macros/s/AKfycbxLG3SwLVDgJX3Tf8c-S2OvKiPoYqKvLuxhP6wN0HdQZS8-ixBnnM-O7RJhAzfUGHrI/exec";
 
 // Lista de presentes (nomes simplificados e sem acentos)
 const presentes = [
