@@ -88,3 +88,14 @@ footer {
   color: #888;
   font-size: 0.9rem;
 }
+
+/* Itens que já foram escolhidos */
+.presente.indisponivel {
+  opacity: 0.5;
+  filter: grayscale(70%);
+}
+
+.presente.indisponivel button {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
