@@ -109,3 +109,43 @@ footer {
   background-color: #ccc !important;
   cursor: not-allowed;
 }
+
+.presente {
+  display: inline-block;
+  width: 200px;
+  margin: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  transition: transform 0.2s;
+}
+
+.presente img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.presente button {
+  margin-top: 8px;
+  background-color: #ffb703;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.presente button:hover:not(:disabled) {
+  background-color: #fb8500;
+}
+
+.presente.indisponivel {
+  opacity: 0.5;
+}
+
+.presente.indisponivel button {
+  background-color: #888;
+  cursor: not-allowed;
+}
