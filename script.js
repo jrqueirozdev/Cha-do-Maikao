@@ -1,7 +1,10 @@
-// URL do Apps Script do Google Sheets:
-const scriptURL = "https://script.google.com/macros/s/AKfycbyMiUbqr5OoAhb6vov7l_TOB33SgnWo8E0y2p3_yIlKc8X3rRjHKRqK91v0F_13xcAV/exec";
+// ⚙️ Configuração do GitHub
+const GITHUB_TOKEN = "ghp_SEU_TOKEN_AQUI"; // 👉 cole aqui o token gerado
+const REPO_OWNER = "jrqueirozdev"; // seu usuário GitHub
+const REPO_NAME = "Cha-do-Maikao"; // nome do repositório
+const FILE_PATH = "dados.json"; // arquivo que vai armazenar as escolhas
 
-// Lista de presentes (nomes simplificados e sem acentos)
+// Lista de presentes
 const presentes = [
   { nome: "Jogo de Panelas Brinox Antiaderente Ceramic Life 7 Peças", imagem: "images/panelas.jpg" },
   { nome: "Air Fryer", imagem: "images/Airfryer.jpg" },
@@ -66,11 +69,11 @@ const presentes = [
   { nome: "Vassoura, Rodo e Pá", imagem: "images/vassoura.jpg" },
   { nome: "Jogo de Xícaras", imagem: "images/xicaras.jpg" },
   { nome: "Jogos americanos/sousplat", imagem: "images/sousplat.jpg" },
-  { nome: "PIX", imagem: "images/PIX.jpg" },
+  { nome: "PIX", imagem: "images/PIX.jpg", ilimitado: true },
   { nome: "Abridor de Latas", imagem: "images/abridordelatas.jpg" }
 ];
 
-// Exibir os presentes na tela
+// 🖼️ Exibir os presentes na tela
 const listaDiv = document.getElementById("lista-presentes");
 
 presentes.forEach((p, i) => {
@@ -84,16 +87,66 @@ presentes.forEach((p, i) => {
   listaDiv.appendChild(item);
 });
 
-// Função de escolha do presente
-function escolherPresente(index) {
+// 🎁 Função para escolher presente
+async function escolherPresente(index) {
   const nome = document.getElementById("nomeConvidado").value.trim();
-  if (nome === "") {
+  if (!nome) {
     alert("Por favor, insira seu nome antes de escolher um presente!");
     return;
   }
 
   const presente = presentes[index];
-  alert(`🎁 Presente reservado! Obrigado, ${nome}, por escolher: ${presente.nome}`);
+  if (!presente.ilimitado) {
+    marcarComoIndisponivel(index);
+  }
 
-  document.getElementsByClassName("presente")[index].style.display = "none";
+  alert(`🎁 Obrigado, ${nome}! Presente escolhido: ${presente.nome}`);
+
+  // Envia para o GitHub
+  await salvarNoGitHub(nome, presente.nome);
+}
+
+// 💾 Salva os dados no arquivo do GitHub
+async function salvarNoGitHub(nome, presente) {
+  const apiUrl = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${FILE_PATH}`;
+
+  try {
+    // Lê o arquivo atual
+    const response = await fetch(apiUrl, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` }
+    });
+    const fileData = await response.json();
+    const content = atob(fileData.content);
+    const data = JSON.parse(content);
+
+    // Adiciona o novo registro
+    data.push({ nome, presente, data: new Date().toISOString() });
+
+    // Atualiza o arquivo
+    const updatedContent = btoa(JSON.stringify(data, null, 2));
+
+    await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        message: `Adicionado: ${presente} por ${nome}`,
+        content: updatedContent,
+        sha: fileData.sha
+      })
+    });
+  } catch (error) {
+    console.error("Erro ao salvar no GitHub:", error);
+  }
+}
+
+// 🚫 Marca o item como indisponível (sem sumir)
+function marcarComoIndisponivel(index) {
+  const item = document.getElementsByClassName("presente")[index];
+  item.classList.add("indisponivel");
+  const botao = item.querySelector("button");
+  botao.disabled = true;
+  botao.innerText = "Indisponível";
 }
