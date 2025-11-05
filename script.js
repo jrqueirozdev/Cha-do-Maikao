@@ -1,8 +1,8 @@
 // ==== CONFIGURAÇÕES ====
-const GITHUB_USER = "SEU_USUARIO";
-const GITHUB_REPO = "SEU_REPOSITORIO";
+const GITHUB_USER = "jrqueirozdev";
+const GITHUB_REPO = "Cha-do-Maikao";
 const GITHUB_FILE = "dados.json";
-const GITHUB_TOKEN = "SEU_TOKEN_AQUI"; // <- Cole seu token aqui
+const GITHUB_TOKEN = "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"; // <- Cole seu token aqui
 const API_URL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
 
 // ==== FUNÇÃO PARA BUSCAR OS DADOS ====
