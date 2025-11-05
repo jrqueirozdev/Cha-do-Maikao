@@ -1,9 +1,5 @@
 // ==== CONFIGURAÇÕES ====
-const GITHUB_USER = "jrqueirozdev";
-const GITHUB_REPO = "Cha-do-Maikao";
-const GITHUB_FILE = "presentes.json";
-const GITHUB_TOKEN = "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"; // seu token
-const API_URL = `https://api.github.com/repos/${GITHUB_USER}/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+const API_URL = "https://raw.githubusercontent.com/jrqueirozdev/Cha-do-Maikao/refs/heads/main/presentes.json";
 
 // ==== FUNÇÃO PARA BUSCAR OS DADOS ====
 async function carregarDados() {
