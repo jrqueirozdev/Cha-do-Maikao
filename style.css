@@ -99,3 +99,13 @@ footer {
   background-color: #ccc;
   cursor: not-allowed;
 }
+
+.indisponivel {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.indisponivel button {
+  background-color: #ccc !important;
+  cursor: not-allowed;
+}
